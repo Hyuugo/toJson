@@ -11,6 +11,12 @@ app.set('port', PORT);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 function make_book() {
 	var ws = XLSX.utils.aoa_to_sheet(data);
 	var wb = XLSX.utils.book_new();
@@ -87,11 +93,11 @@ function post_file(req, res, file) {
 	res.json(load_data(file));
 }
 
-app.get('/', function (request, response) {
-	response.render('toJson');
+app.get('/', function (req, res, next) {
+	res.render('toJson');
 });
 
-app.post('/xlsx', (req, res) => {
+app.post('/xlsx', function (req, res, next) {
 	var url = URL.parse(req.url, true);
 	if(url.query.f && url.query.listName) 
 		return post_file(req, res, url.query.f, url.query.listName);
