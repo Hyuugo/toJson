@@ -9,7 +9,7 @@ const express = require('express'),
 app.use(formidable());
 app.set('port', PORT);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'pug');
+app.set('view engine', 'pug'); 
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
