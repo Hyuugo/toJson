@@ -9,7 +9,7 @@ const express = require('express'),
 app.use(formidable());
 app.set('port', PORT);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'html');
+app.set('view engine', 'pug');
 
 function make_book() {
 	var ws = XLSX.utils.aoa_to_sheet(data);
@@ -87,11 +87,11 @@ function post_file(req, res, file) {
 	res.json(load_data(file));
 }
 
-app.get('/toJson/', function (request, response) {
+app.get('/', function (request, response) {
 	response.render('toJson');
 });
 
-app.post('/toJson', (req, res) => {
+app.post('/xlsx', (req, res) => {
 	var url = URL.parse(req.url, true);
 	if(url.query.f && url.query.listName) 
 		return post_file(req, res, url.query.f, url.query.listName);
