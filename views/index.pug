@@ -9,7 +9,7 @@ html(lang='en')
       div(id='xlsxFile_div')
         div(class='form-group')
             label(for='xlsxFile') XLSX
-                form(id='xlsxFile' method='POST' action='/xlsx' enctype='multipart/form-data') 
-                    input(type='file' name='f' id='xlsxFile_form' class="form-control" value="")
+                form(method='POST' action='/xlsx' enctype='multipart/form-data') 
+                    input(type='file' name='f' class="form-control" value="")
                     input(type='text' name='listName' class="form-control" value="")
                     button(class='btn btn-success btn-lg' type='submit') To JSON 
